@@ -14,7 +14,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#lastName').type('Coqueiro')
     cy.get('#email').type('vns.fsilva@gmail.com')
     cy.get('#open-text-area').type('fazendo meu primeiro teste de preenchimento de campos e envio de formulario', { delay: 0 })
-    cy.get('.button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     //Resultado esperado
     cy.get('.success').should('be.visible')
@@ -26,7 +26,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#lastName').type('Coqueiro')
     cy.get('#email').type('vns.fsilva@gmail,com')
     cy.get('#open-text-area').type('Teste')
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
 
@@ -45,7 +45,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#email').type('vns.fsilva@gmail.com')
     cy.get('#phone-checkbox').check()
     cy.get('#open-text-area').type('Teste')
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
 
@@ -70,10 +70,16 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .clear()
   })
 
-  it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-    cy.get('button[type="submit"]').click()
+  it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+    cy.contains('button', 'Enviar').click()
     
     cy.get('.error').should('be.visible')
+  })
+
+  it('envia o formuário com sucesso usando um comando customizado', () => {
+    cy.fillMandatoryFieldsAndSubmit()
+
+    cy.get('.success').should('be.visible')
   })
 })
 
