@@ -1,4 +1,4 @@
-Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (data = {
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', (data ={
     firstName: 'Renato',
     lastName: 'Coqueiro',
     email: 'rb.coqueiro@gmail.com',
